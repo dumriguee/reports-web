@@ -1,0 +1,50 @@
+<main
+  tuiNavigationMain
+  style="display: flex; flex-direction: column; gap: 1rem"
+>
+  <header tuiTitle>
+    <div tuiNavigationLogo>
+      <tui-icon icon="@tui.file" />
+      <h1 tuiFade class="navbar-header">Reports</h1>
+    </div>
+    <div tuiSubtitle>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex deleniti, sit
+      quam non reprehenderit nulla adipisci corrupti ut, provident molestias
+      minima labore. Dignissimos perferendis repudiandae amet ipsam, quas
+      corrupti reiciendis autem repellendus, fuga et, rem aliquam reprehenderit
+      praesentium! Vitae tenetur rerum veritatis similique eius qui tempora!
+      Maxime commodi laboriosam doloribus dolorum? Praesentium voluptates, minus
+      suscipit libero dignissimos recusandae dicta sit modi consectetur id
+      dolorem, soluta delectus enim, tenetur repellat dolores nam vitae expedita
+      molestiae cumque?
+    </div>
+  </header>
+
+  <tui-tabs>
+    <button
+      tuiTab
+      [routerLink]="['/member']"
+      iconStart="@tui.users"
+      routerLinkActive="router-link-active"
+    >
+      Member
+    </button>
+    <button
+      tuiTab
+      [routerLink]="['/enrollment']"
+      type="button"
+      iconStart="@tui.book-user"
+      routerLinkActive="router-link-active"
+    >
+      Enrollment
+    </button>
+    <button
+      tuiTab
+      [routerLink]="['/termination']"
+      iconStart="@tui.book-user"
+      routerLinkActive="router-link-active"
+    >
+      Termination
+    </button>
+  </tui-tabs>
+</main>
