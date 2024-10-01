@@ -1,5 +1,12 @@
 # ReportsWeb
 
+## UI Library
+[Taiga UI](https://taiga-ui.dev/getting-started)
+
+## Download VS Code Extensions
+- Prettier Eslint
+- Eslint
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
 
 ## Development server
