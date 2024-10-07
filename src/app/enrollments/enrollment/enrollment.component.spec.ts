@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EnrollmentComponent } from './enrollment.component';
 
-describe('EnrollmentComponent', () => {
+describe('TerminationComponent', () => {
   let component: EnrollmentComponent;
   let fixture: ComponentFixture<EnrollmentComponent>;
 
@@ -21,3 +21,4 @@ describe('EnrollmentComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
