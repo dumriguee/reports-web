@@ -1,7 +1,7 @@
-import { TuiIcon, TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiIcon, TuiTitle } from '@taiga-ui/core';
 import { TuiTabs } from '@taiga-ui/kit';
 import { TuiCardLarge, TuiHeader, TuiNavigation } from '@taiga-ui/layout';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,13 +9,16 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [
     TuiIcon,
+    TuiButton,
     TuiTitle,
     TuiHeader,
     TuiNavigation,
     TuiCardLarge,
     TuiTabs,
     RouterLink,
+    RouterModule,
   ],
+  providers: [],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })

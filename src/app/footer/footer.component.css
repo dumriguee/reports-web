@@ -1,0 +1,29 @@
+footer {
+  margin-bottom: -50px;
+  padding: 5rem 2rem 1rem 2rem;
+  --mask: radial-gradient(48.02px at 50% 67.5px, #000 99%, #0000 101%)
+      calc(50% - 60px) 0/120px 100%,
+    radial-gradient(48.02px at 50% -37.5px, #0000 99%, #000 101%) 50% 30px/120px
+      100% repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  background: rgb(255,201,185);
+background: linear-gradient(90deg, rgba(255,201,185,1) 0%, rgba(170,206,165,1) 100%);
+}
+
+.footer-wrap {
+  margin-top: 3rem;
+  filter: drop-shadow(1px 6px 12px rgba(50, 60, 0, 0.2));
+  -webkit-filter: drop-shadow(1px 6px 12px rgba(50, 60, 0, 0.2));
+  -moz-filter: drop-shadow(1px 6px 12px rgba(50, 60, 0, 0.2));
+  -ms-filter: drop-shadow(1px 6px 12px rgba(50, 60, 0, 0.2));
+  -o-filter: drop-shadow(1px 6px 12px rgba(50, 60, 0, 0.2));
+}
+
+.brand {
+  display: flex;
+  margin-top: 0.5rem;
+}
+h1 {
+  font-size: 3rem;
+}

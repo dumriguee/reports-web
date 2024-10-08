@@ -40,6 +40,10 @@ export class ReportService {
   }
 
   getTerminationReport(paremeters: ReportFunctionParemeters) {
+    console.log(`FORMATTED:
+      ${this.datePipe.transform(paremeters.startDate, this.dateFormat)},
+      paremeters.startDate,
+      `);
     return this.http.get(
       `${this.baseUrl}/report/termination?StartDate=${this.datePipe.transform(paremeters.startDate, this.dateFormat)}&EndDate=${this.datePipe.transform(paremeters.endDate, this.dateFormat)}&Corpacct=${paremeters.corporateAccountNumber}`,
       {
