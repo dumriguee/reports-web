@@ -7,8 +7,12 @@ footer {
       100% repeat-x;
   -webkit-mask: var(--mask);
   mask: var(--mask);
-  background: rgb(255,201,185);
-background: linear-gradient(90deg, rgba(255,201,185,1) 0%, rgba(170,206,165,1) 100%);
+  background: rgb(255, 201, 185);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 201, 185, 1) 0%,
+    rgba(170, 206, 165, 1) 100%
+  );
 }
 
 .footer-wrap {
@@ -23,7 +27,9 @@ background: linear-gradient(90deg, rgba(255,201,185,1) 0%, rgba(170,206,165,1) 1
 .brand {
   display: flex;
   margin-top: 0.5rem;
+  font-weight: 800;
 }
+
 h1 {
   font-size: 3rem;
 }

@@ -7,6 +7,9 @@
     --tui-text-secondary: #666666; /* Medium Gray */
     --tui-border-color: #dddddd; /* Light Gray */
   height: 100%;
+  font-family: 'Sora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  --tui-font-text: 'Sora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
+
 
 
