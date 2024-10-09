@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --tui-primary: #ff6347; /* Tomato */
+    --tui-secondary: #4682b4; /* SteelBlue */
+    --tui-background: #f0f8ff; /* AliceBlue */
+    --tui-text-primary: #333333; /* Dark Gray */
+    --tui-text-secondary: #666666; /* Medium Gray */
+    --tui-border-color: #dddddd; /* Light Gray */
+  height: 100%;
+  font-family: 'Sora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  --tui-font-text: 'Sora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+
+

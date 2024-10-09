@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { type Company } from './interfaces/company';
 import { withLoadingState } from './with-loading-state';
 import { environment } from '../../environments/development';
+import { ReportFunctionParams } from './member.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +18,9 @@ export class ReportService {
 
   constructor(private http: HttpClient) {}
 
-  getMemberReport(paremeters: ReportFunctionParemeters) {
+  getMemberReport(paremeters: ReportFunctionParams) {
     return this.http.get(
-      `${this.baseUrl}/report/member?StartDate=${this.datePipe.transform(paremeters.startDate, this.dateFormat)}&EndDate=${this.datePipe.transform(paremeters.endDate, this.dateFormat)}&Corpacct=${paremeters.corporateAccountNumber}`,
+      `${this.baseUrl}/report/member?&Corpacct=${paremeters.corporateAccountNumber}`,
       {
         responseType: 'blob',
         observe: 'events' as const,
@@ -40,6 +41,10 @@ export class ReportService {
   }
 
   getTerminationReport(paremeters: ReportFunctionParemeters) {
+    console.log(`FORMATTED:
+      ${this.datePipe.transform(paremeters.startDate, this.dateFormat)},
+      paremeters.startDate,
+      `);
     return this.http.get(
       `${this.baseUrl}/report/termination?StartDate=${this.datePipe.transform(paremeters.startDate, this.dateFormat)}&EndDate=${this.datePipe.transform(paremeters.endDate, this.dateFormat)}&Corpacct=${paremeters.corporateAccountNumber}`,
       {

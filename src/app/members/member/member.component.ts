@@ -51,15 +51,13 @@ export class MemberComponent implements OnInit {
   reportService = inject(ReportService);
 
   companies: WritableSignal<Company[]> = signal([]);
-  currentDay = TuiDay.currentLocal();
   isFormSubmitted = signal(false);
   isFetchingCompanies = signal(false);
   memberReportForm = new FormGroup({
     corporateAccount: new FormControl<Company | null>(
       { value: null, disabled: this.isFetchingCompanies() },
       [Validators.required],
-    ),
-    dateRange: new FormControl<TuiDayRange | null>(null, [Validators.required]),
+    )
   });
 
   // Fetching Status
@@ -91,25 +89,18 @@ export class MemberComponent implements OnInit {
     return this.memberReportForm.controls.corporateAccount;
   }
 
-  get dateRange() {
-    return this.memberReportForm.controls.dateRange;
-  }
+
 
   onSubmit() {
     this.isFormSubmitted.set(true);
     if (this.memberReportForm.valid) {
-      const startDate =
-        this.dateRange?.value?.from.toUtcNativeDate() ?? new Date();
-      const endDate = this.dateRange?.value?.to.toUtcNativeDate() ?? new Date();
       const corporateAccountNumber =
         this.corporateAccount?.value?.accountNumber ?? '';
-
+        
       this.memberReportForm.disable();
       this.reportService
         .getMemberReport({
-          startDate,
-          endDate,
-          corporateAccountNumber,
+          corporateAccountNumber
         })
         .subscribe({
           next: (event: HttpEvent<Blob>) => {
@@ -119,10 +110,6 @@ export class MemberComponent implements OnInit {
                   event,
                   generateFileName(
                     corporateAccountNumber,
-                    this.datePipe.transform(
-                      this.currentDay?.toLocalNativeDate(),
-                      'shortDate',
-                    ) ?? '',
                   ),
                 );
                 break;

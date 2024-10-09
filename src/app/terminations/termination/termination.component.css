@@ -1,7 +1,7 @@
 .termination-form {
   width: 70%;
   display: flex;
-  padding: 2rem;
+  padding: 2rem 2.5rem;
   box-shadow: 0px 2px 26px -1px rgba(102,102,102,0.16);
   -webkit-box-shadow: 0px 2px 26px -1px rgba(102,102,102,0.16);
   -moz-box-shadow: 0px 2px 26px -1px rgba(102,102,102,0.16);
@@ -13,6 +13,7 @@
 
 .termination-header {
   margin-bottom: 0.2rem;
+  font-weight: bold;
 }
 
 .form-control-group {
