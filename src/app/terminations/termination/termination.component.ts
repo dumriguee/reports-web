@@ -173,6 +173,9 @@ export class TerminationComponent implements OnInit {
             this.terminationReportForm.markAsPristine();
             this.terminationReportForm.markAsUntouched();
             this.terminationReportForm.reset();
+            this.dateRange.setValue(
+              new TuiDayRange(TuiDay.currentLocal(), TuiDay.currentLocal()),
+            );
             this.downloadProgress.update(() => 0);
           },
           error: () => {
