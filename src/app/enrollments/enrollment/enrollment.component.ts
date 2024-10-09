@@ -19,7 +19,7 @@ import {
 } from '@taiga-ui/legacy';
 import { ReportService } from '../../shared/report.service';
 import { Company } from '../../shared/interfaces/company';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass,NgIf } from '@angular/common';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
 import { TuiDay, TuiDayRange } from '@taiga-ui/cdk/date-time';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
@@ -42,6 +42,7 @@ import {
     TuiComboBoxModule,
     TuiSelectModule,
     NgClass,
+    NgIf,
   ],
   providers: [ReportService, DatePipe],
   templateUrl: './enrollment.component.html',
@@ -105,6 +106,7 @@ export class EnrollmentComponent implements OnInit {
         this.corporateAccount?.value?.accountNumber ?? '';
 
       this.enrollmentReportForm.disable();
+      this.isFetchingReports.set(true);
       this.reportService
         .getEnrollmentReport({
           startDate,
@@ -128,7 +130,7 @@ export class EnrollmentComponent implements OnInit {
                 break;
               }
               case HttpEventType.DownloadProgress: {
-                const total = event.total ?? 1;
+                const total = event.total ?? 5;
                 const progess = Math.round((100 * event.loaded) / total);
 
                 this.downloadProgress.set(progess);
@@ -137,7 +139,8 @@ export class EnrollmentComponent implements OnInit {
             }
           },
           complete: () => {
-            this.isFetchingReports.update((value) => !value);
+            //this.isFetchingReports.update((value) => !value);
+            this.isFetchingReports.set(false);
             this.isFormSubmitted.set(false);
             this.enrollmentReportForm.enable();
             this.enrollmentReportForm.markAsPristine();
@@ -147,6 +150,7 @@ export class EnrollmentComponent implements OnInit {
           },
           error: (error) => {
             console.error(error);
+            this.isFetchingReports.set(false);
             this.enrollmentReportForm.enable();
           },
         });
