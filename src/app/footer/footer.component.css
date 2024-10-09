@@ -13,6 +13,8 @@ footer {
     rgba(255, 201, 185, 1) 0%,
     rgba(170, 206, 165, 1) 100%
   );
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .footer-wrap {

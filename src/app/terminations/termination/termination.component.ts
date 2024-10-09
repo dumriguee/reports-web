@@ -11,7 +11,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TuiButton, TuiDataList, TuiIcon } from '@taiga-ui/core';
+import {
+  TuiAlertService,
+  TuiButton,
+  TuiDataList,
+  TuiIcon,
+} from '@taiga-ui/core';
 import {
   TuiComboBoxModule,
   TuiInputDateRangeModule,
@@ -48,6 +53,7 @@ import {
   styleUrl: './termination.component.css',
 })
 export class TerminationComponent implements OnInit {
+  alerts = inject(TuiAlertService);
   reportService = inject(ReportService);
 
   companies: WritableSignal<Company[]> = signal([]);
@@ -67,6 +73,19 @@ export class TerminationComponent implements OnInit {
   isFetchingReports = signal(false);
 
   constructor(private datePipe: DatePipe) {}
+
+  errorNotification(title: string, message: string): void {
+    this.alerts
+      .open(title, { label: message, appearance: 'error' })
+      .subscribe();
+  }
+
+  successNotification(title: string, message: string): void {
+    this.alerts
+      .open(title, { label: message, appearance: 'success' })
+      .subscribe();
+  }
+
   ngOnInit() {
     this.isFetchingCompanies.set(true);
     this.terminationReportForm.disable();
@@ -74,6 +93,13 @@ export class TerminationComponent implements OnInit {
       next: (value) => {
         if (value.state == 'loaded') {
           this.companies.set(value?.data.body ?? []);
+        }
+
+        if (value.state === 'error') {
+          this.errorNotification(
+            'Had a problem fetching corporate accounts.',
+            'Error fetching companies',
+          );
         }
       },
       complete: () => {
@@ -115,6 +141,10 @@ export class TerminationComponent implements OnInit {
           next: (event: HttpEvent<Blob>) => {
             switch (event.type) {
               case HttpEventType.Response: {
+                this.successNotification(
+                  'You have successfully generated a termination report. Please review it for accuracy and completeness.',
+                  'Succesful Termination Report Generation',
+                );
                 downloadReport(
                   event,
                   generateFileName(
@@ -145,13 +175,10 @@ export class TerminationComponent implements OnInit {
             this.terminationReportForm.reset();
             this.downloadProgress.update(() => 0);
           },
-          error: (error) => {
-            console.error(error);
+          error: () => {
             this.terminationReportForm.enable();
           },
         });
     }
-    console.log(this.terminationReportForm.value);
-    console.log(this.terminationReportForm.controls.corporateAccount.errors);
   }
 }

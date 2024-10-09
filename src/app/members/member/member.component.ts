@@ -21,7 +21,6 @@ import { ReportService } from '../../shared/report.service';
 import { Company } from '../../shared/interfaces/company';
 import { DatePipe, NgClass } from '@angular/common';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
-import { TuiDay, TuiDayRange } from '@taiga-ui/cdk/date-time';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import {
   downloadReport,
@@ -57,7 +56,7 @@ export class MemberComponent implements OnInit {
     corporateAccount: new FormControl<Company | null>(
       { value: null, disabled: this.isFetchingCompanies() },
       [Validators.required],
-    )
+    ),
   });
 
   // Fetching Status
@@ -89,29 +88,22 @@ export class MemberComponent implements OnInit {
     return this.memberReportForm.controls.corporateAccount;
   }
 
-
-
   onSubmit() {
     this.isFormSubmitted.set(true);
     if (this.memberReportForm.valid) {
       const corporateAccountNumber =
         this.corporateAccount?.value?.accountNumber ?? '';
-        
+
       this.memberReportForm.disable();
       this.reportService
         .getMemberReport({
-          corporateAccountNumber
+          corporateAccountNumber,
         })
         .subscribe({
           next: (event: HttpEvent<Blob>) => {
             switch (event.type) {
               case HttpEventType.Response: {
-                downloadReport(
-                  event,
-                  generateFileName(
-                    corporateAccountNumber,
-                  ),
-                );
+                downloadReport(event, generateFileName(corporateAccountNumber));
                 break;
               }
               case HttpEventType.DownloadProgress: {
@@ -142,4 +134,3 @@ export class MemberComponent implements OnInit {
     console.log(this.memberReportForm.controls.corporateAccount.errors);
   }
 }
-
