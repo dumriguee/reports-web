@@ -19,9 +19,8 @@ import {
 } from '@taiga-ui/legacy';
 import { ReportService } from '../../shared/report.service';
 import { Company } from '../../shared/interfaces/company';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass,NgIf } from '@angular/common';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
-import { TuiDay, TuiDayRange } from '@taiga-ui/cdk/date-time';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import {
   downloadReport,
@@ -42,6 +41,7 @@ import {
     TuiComboBoxModule,
     TuiSelectModule,
     NgClass,
+    NgIf,
   ],
   providers: [ReportService, DatePipe],
   templateUrl: './member.component.html',
@@ -98,6 +98,7 @@ export class MemberComponent implements OnInit {
         this.corporateAccount?.value?.accountNumber ?? '';
         
       this.memberReportForm.disable();
+      this.isFetchingReports.set(true);
       this.reportService
         .getMemberReport({
           corporateAccountNumber
@@ -124,7 +125,8 @@ export class MemberComponent implements OnInit {
             }
           },
           complete: () => {
-            this.isFetchingReports.update((value) => !value);
+            //this.isFetchingReports.update((value) => !value);
+            this.isFetchingReports.set(false);
             this.isFormSubmitted.set(false);
             this.memberReportForm.enable();
             this.memberReportForm.markAsPristine();
@@ -134,6 +136,7 @@ export class MemberComponent implements OnInit {
           },
           error: (error) => {
             console.error(error);
+            this.isFetchingReports.set(false);
             this.memberReportForm.enable();
           },
         });
