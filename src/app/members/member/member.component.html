@@ -31,9 +31,10 @@
         >
       }
     </div>
-    <button size="m" tuiButton type="submit">
-      <tui-icon icon="@tui.send" />
-      Submit
+    <button size="m" tuiButton type="submit" [disabled]="isFetchingReports()">
+      <tui-icon *ngIf="!isFetchingReports()" icon="@tui.send"></tui-icon>
+      <span *ngIf="isFetchingReports()">Loading...</span>
+      <span *ngIf="!isFetchingReports()">Submit</span>
     </button>
   </form>
 </div>
