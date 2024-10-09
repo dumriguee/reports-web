@@ -19,7 +19,7 @@ import {
 } from '@taiga-ui/legacy';
 import { ReportService } from '../../shared/report.service';
 import { Company } from '../../shared/interfaces/company';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass,NgIf } from '@angular/common';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
 import { TuiDay, TuiDayRange } from '@taiga-ui/cdk/date-time';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
@@ -42,6 +42,7 @@ import {
     TuiComboBoxModule,
     TuiSelectModule,
     NgClass,
+    NgIf,
   ],
   providers: [ReportService, DatePipe],
   templateUrl: './termination.component.html',
@@ -105,6 +106,7 @@ export class TerminationComponent implements OnInit {
         this.corporateAccount?.value?.accountNumber ?? '';
 
       this.terminationReportForm.disable();
+      this.isFetchingReports.set(true);
       this.reportService
         .getTerminationReport({
           startDate,
@@ -137,7 +139,8 @@ export class TerminationComponent implements OnInit {
             }
           },
           complete: () => {
-            this.isFetchingReports.update((value) => !value);
+            //this.isFetchingReports.update((value) => !value);
+            this.isFetchingReports.set(false);
             this.isFormSubmitted.set(false);
             this.terminationReportForm.enable();
             this.terminationReportForm.markAsPristine();
@@ -147,6 +150,7 @@ export class TerminationComponent implements OnInit {
           },
           error: (error) => {
             console.error(error);
+            this.isFetchingReports.set(false);
             this.terminationReportForm.enable();
           },
         });
