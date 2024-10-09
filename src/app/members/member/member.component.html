@@ -26,13 +26,19 @@
         />
       </tui-combo-box>
       @if (corporateAccount.hasError("required") && isFormSubmitted()) {
-        <label for="corporateAccount" class="label-error">This is required.</label>
+        <label for="corporateAccount" class="label-error"
+          >This is required.</label
+        >
       }
     </div>
     <button size="m" tuiButton type="submit" [disabled]="isFetchingReports()">
-      <tui-icon *ngIf="!isFetchingReports()" icon="@tui.send"></tui-icon>
-      <span *ngIf="isFetchingReports()">Loading...</span>
-      <span *ngIf="!isFetchingReports()">Submit</span>
+      <span *ngIf="isFetchingReports()"
+        ><tui-icon icon="@tui.loader" style="height: 1.2rem; margin: auto 0" />
+        Generating Report...</span
+      >
+      <span *ngIf="!isFetchingReports()"
+        ><tui-icon icon="@tui.send" /> Submit</span
+      >
     </button>
   </form>
 </div>
